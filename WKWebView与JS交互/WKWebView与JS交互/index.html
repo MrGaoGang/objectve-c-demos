@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // oc调用js代码
+      function ocToH51(params,params2) {
+        document.getElementsByClassName("data")[0].innerHTML = params+'\n'+params2;
+      }
+
+      function h5ToOC1() {
+        // 在OC中可以通过message.name isEqualsString h5ToOC1来获取到此处调用的参数
+        window.webkit.messageHandlers.h5ToOC1.postMessage(
+          "我是h5传递过来的一个参数"
+        );
+      }
+
+      function h5ToOC2() {
+        // 在OC中可以通过message.name isEqualsString h5ToOC2来获取到此处调用的参数
+
+        window.webkit.messageHandlers.h5ToOC2.postMessage([
+          "我是h5传递过来的一个参数",
+          "我是第二个参数",
+        ]);
+      }
+    </script>
+
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container button {
+        margin-top: 20px;
+        background-color: dodgerblue;
+        color: white;
+        border-radius: 5px;
+        height: 50px;
+        border: 1px solid white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>我是H5页面</h2>
+      <button onclick="h5ToOC1()">传递单个参数给iOS</button>
+      <button onclick="h5ToOC2()">传递多个参数给iOS</button>
+
+      <h3>如下是oc传递给H5的数据</h3>
+      <div class="data"></div>
+    </div>
+  </body>
+</html>
